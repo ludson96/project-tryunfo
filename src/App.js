@@ -14,21 +14,88 @@ class App extends React.Component {
       cardAttr3: '',
       cardImage: '',
       cardRare: '',
-      cardTrunfo: '',
+      cardTrunfo: false,
+      isSaveButtonDisabled: true,
+      saveArray: [],
     };
 
     this.handleChangeGeneric = this.handleChangeGeneric.bind(this);
+    this.handleSaveButton = this.handleSaveButton.bind(this);
   }
 
   handleChangeGeneric({ target }) {
     const { name } = target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    this.setState({ [name]: value });
+    this.setState(({ [name]: value }), this.handleDisabled);
+  }
+
+  handleDisabled() {
+    const {
+      cardName,
+      cardDescription,
+      cardImage,
+      cardRare,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+    } = this.state;
+
+    const soma = Number(cardAttr1) + Number(cardAttr2) + Number(cardAttr3);
+    const limite = 210;
+    const max = 90;
+    const negativo = 0;
+    if (cardName && cardDescription && cardImage
+        && cardRare && soma <= limite && Number(cardAttr1) <= max
+        && Number(cardAttr2) <= max && Number(cardAttr3) <= max
+        && Number(cardAttr1) >= negativo && Number(cardAttr2) >= negativo
+        && Number(cardAttr3) >= negativo) {
+      this.setState({ isSaveButtonDisabled: false });
+    } else {
+      this.setState({ isSaveButtonDisabled: true });
+    }
+  }
+
+  handleSaveButton() {
+    this.setState((prevState) => {
+      const {
+        cardName,
+        cardDescription,
+        cardImage,
+        cardRare,
+        cardAttr1,
+        cardAttr2,
+        cardAttr3,
+      } = this.state;
+
+      const meuObjeto = {
+        cardName,
+        cardDescription,
+        cardImage,
+        cardRare,
+        cardAttr1,
+        cardAttr2,
+        cardAttr3,
+      };
+
+      return {
+        saveArray: [...prevState.saveArray, meuObjeto],
+      };
+    });
+
+    this.setState({
+      cardName: '',
+      cardDescription: '',
+      cardImage: '',
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
+      cardRare: 'normal',
+    });
   }
 
   render() {
     const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3, cardImage,
-      cardRare, cardTrunfo } = this.state;
+      cardRare, cardTrunfo, isSaveButtonDisabled, saveArray } = this.state;
     return (
       <div>
         <h1>Tryunfo</h1>
@@ -41,7 +108,9 @@ class App extends React.Component {
           cardImage={ cardImage }
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
+          isSaveButtonDisabled={ isSaveButtonDisabled }
           onInputChange={ this.handleChangeGeneric }
+          onSaveButtonClick={ this.handleSaveButton }
         />
         <Card
           cardName={ cardName }
@@ -53,6 +122,9 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
         />
+        <p>
+          {` Teste saveArray: ${saveArray}`}
+        </p>
       </div>
     );
   }

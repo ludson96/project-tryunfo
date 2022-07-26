@@ -9,7 +9,7 @@ class Form extends React.Component {
     } = this.props;
     // hasTrunfo,
     return (
-      <form onSubmit="">
+      <form>
 
         <label htmlFor="nome">
           Nome:
@@ -67,6 +67,7 @@ class Form extends React.Component {
         </label>
 
         <label htmlFor="img">
+          Image:
           <input
             type="text"
             name="cardImage"
