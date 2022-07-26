@@ -17,6 +17,7 @@ class App extends React.Component {
       cardTrunfo: false,
       isSaveButtonDisabled: true,
       saveArray: [],
+      hasTrunfo: false,
     };
 
     this.handleChangeGeneric = this.handleChangeGeneric.bind(this);
@@ -65,6 +66,7 @@ class App extends React.Component {
         cardAttr1,
         cardAttr2,
         cardAttr3,
+        cardTrunfo,
       } = this.state;
 
       const meuObjeto = {
@@ -75,7 +77,14 @@ class App extends React.Component {
         cardAttr1,
         cardAttr2,
         cardAttr3,
+        cardTrunfo,
       };
+
+      if (cardTrunfo) {
+        this.setState({ hasTrunfo: true });
+      } else {
+        this.setState({ hasTrunfo: false });
+      }
 
       return {
         saveArray: [...prevState.saveArray, meuObjeto],
@@ -95,7 +104,7 @@ class App extends React.Component {
 
   render() {
     const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3, cardImage,
-      cardRare, cardTrunfo, isSaveButtonDisabled, saveArray } = this.state;
+      cardRare, cardTrunfo, isSaveButtonDisabled, saveArray, hasTrunfo } = this.state;
     return (
       <div>
         <h1>Tryunfo</h1>
@@ -111,6 +120,7 @@ class App extends React.Component {
           isSaveButtonDisabled={ isSaveButtonDisabled }
           onInputChange={ this.handleChangeGeneric }
           onSaveButtonClick={ this.handleSaveButton }
+          hasTrunfo={ hasTrunfo }
         />
         <Card
           cardName={ cardName }
