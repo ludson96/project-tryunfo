@@ -19,6 +19,8 @@ class App extends React.Component {
       hasTrunfo: false,
       filterName: '',
       filterRaridade: 'todas',
+      filterDisabled: false,
+      filterTrunfo: false,
     };
 
     this.handleChangeGeneric = this.handleChangeGeneric.bind(this);
@@ -105,12 +107,8 @@ class App extends React.Component {
   }
 
   handleDeleteCard({ target }) {
-    const {
-      cardTrunfo,
-    } = this.state;
-
+    const { cardTrunfo } = this.state;
     target.parentNode.remove();
-
     if (cardTrunfo) {
       this.setState({ hasTrunfo: false });
     }
@@ -120,17 +118,28 @@ class App extends React.Component {
 
   handleFilterRaridade = ({ target }) => this.setState({ filterRaridade: target.value });
 
+  handleFilterTrunfo = ({ target }) => {
+    const value = target.checked;
+    if (value) {
+      this.setState({ filterDisabled: true });
+    } else { this.setState({ filterDisabled: false }); }
+    this.setState(({ filterTrunfo: value }));
+  }
+
   render() {
     const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3, cardImage,
       cardRare, cardTrunfo, isSaveButtonDisabled, saveArray, hasTrunfo,
-      filterName, filterRaridade } = this.state;
+      filterName, filterRaridade, filterDisabled, filterTrunfo } = this.state;
 
     const arrayFilterName = saveArray.filter((e) => {
+      if (filterTrunfo) return e.cardTrunfo === true;
       let retornoName = '';
+
       if ((e.cardRare === filterRaridade || filterRaridade === 'todas')
       && e.cardName.includes(filterName)) {
         retornoName = e;
       }
+
       return retornoName;
     });
 
@@ -198,17 +207,29 @@ class App extends React.Component {
               data-testid="name-filter"
               placeholder="Nome da carta"
               onChange={ this.handleFilterName }
+              disabled={ filterDisabled }
             />
             <select
               name="filterRare"
               data-testid="rare-filter"
               onChange={ this.handleFilterRaridade }
+              disabled={ filterDisabled }
             >
               <option value="todas">Todas</option>
               <option value="normal">Normal</option>
               <option value="raro">Raro</option>
               <option value="muito raro">Muito raro</option>
             </select>
+          </label>
+          <label htmlFor="trunfo">
+            Super Trunfo:
+            <input
+              type="checkbox"
+              name="filterTrunfo"
+              data-testid="trunfo-filter"
+              checked={ filterTrunfo }
+              onChange={ this.handleFilterTrunfo }
+            />
           </label>
         </div>
       </main>
