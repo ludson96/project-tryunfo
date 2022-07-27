@@ -6,8 +6,7 @@ class App extends React.Component {
   constructor() {
     super();
 
-    this.state = {
-      cardName: '',
+    this.state = { cardName: '',
       cardDescription: '',
       cardAttr1: '',
       cardAttr2: '',
@@ -18,6 +17,8 @@ class App extends React.Component {
       isSaveButtonDisabled: true,
       saveArray: [],
       hasTrunfo: false,
+      filterName: '',
+      filterRaridade: 'todas',
     };
 
     this.handleChangeGeneric = this.handleChangeGeneric.bind(this);
@@ -115,9 +116,23 @@ class App extends React.Component {
     }
   }
 
+  handleFilterName = ({ target }) => this.setState({ filterName: target.value });
+
+  handleFilterRaridade = ({ target }) => this.setState({ filterRaridade: target.value });
+
   render() {
     const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3, cardImage,
-      cardRare, cardTrunfo, isSaveButtonDisabled, saveArray, hasTrunfo } = this.state;
+      cardRare, cardTrunfo, isSaveButtonDisabled, saveArray, hasTrunfo,
+      filterName, filterRaridade } = this.state;
+
+    const arrayFilterName = saveArray.filter((e) => {
+      let retornoName = '';
+      if ((e.cardRare === filterRaridade || filterRaridade === 'todas')
+      && e.cardName.includes(filterName)) {
+        retornoName = e;
+      }
+      return retornoName;
+    });
 
     const button = (
       <button
@@ -130,7 +145,7 @@ class App extends React.Component {
       </button>
     );
 
-    const teste = saveArray.map((e) => (<Card
+    const teste = arrayFilterName.map((e) => (<Card
       key={ e.cadName }
       cardName={ e.cardName }
       cardDescription={ e.cardDescription }
@@ -145,34 +160,58 @@ class App extends React.Component {
     ));
 
     return (
-      <div>
-        <h1>Tryunfo</h1>
-        <Form
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardImage={ cardImage }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-          isSaveButtonDisabled={ isSaveButtonDisabled }
-          onInputChange={ this.handleChangeGeneric }
-          onSaveButtonClick={ this.handleSaveButton }
-          hasTrunfo={ hasTrunfo }
-        />
-        <Card
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardImage={ cardImage }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-        />
-        <div>{ teste }</div>
-      </div>
+      <main>
+        <div>
+          <h1>Tryunfo</h1>
+          <Form
+            cardName={ cardName }
+            cardDescription={ cardDescription }
+            cardAttr1={ cardAttr1 }
+            cardAttr2={ cardAttr2 }
+            cardAttr3={ cardAttr3 }
+            cardImage={ cardImage }
+            cardRare={ cardRare }
+            cardTrunfo={ cardTrunfo }
+            isSaveButtonDisabled={ isSaveButtonDisabled }
+            onInputChange={ this.handleChangeGeneric }
+            onSaveButtonClick={ this.handleSaveButton }
+            hasTrunfo={ hasTrunfo }
+          />
+          <Card
+            cardName={ cardName }
+            cardDescription={ cardDescription }
+            cardImage={ cardImage }
+            cardAttr1={ cardAttr1 }
+            cardAttr2={ cardAttr2 }
+            cardAttr3={ cardAttr3 }
+            cardRare={ cardRare }
+            cardTrunfo={ cardTrunfo }
+          />
+          <div>{ teste }</div>
+        </div>
+        <div>
+          <label htmlFor="filterName">
+            Filtro de busca
+            <input
+              type="text"
+              name="filterName"
+              data-testid="name-filter"
+              placeholder="Nome da carta"
+              onChange={ this.handleFilterName }
+            />
+            <select
+              name="filterRare"
+              data-testid="rare-filter"
+              onChange={ this.handleFilterRaridade }
+            >
+              <option value="todas">Todas</option>
+              <option value="normal">Normal</option>
+              <option value="raro">Raro</option>
+              <option value="muito raro">Muito raro</option>
+            </select>
+          </label>
+        </div>
+      </main>
     );
   }
 }
