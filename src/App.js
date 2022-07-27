@@ -22,6 +22,7 @@ class App extends React.Component {
 
     this.handleChangeGeneric = this.handleChangeGeneric.bind(this);
     this.handleSaveButton = this.handleSaveButton.bind(this);
+    this.handleDeleteCard = this.handleDeleteCard.bind(this);
   }
 
   handleChangeGeneric({ target }) {
@@ -102,9 +103,32 @@ class App extends React.Component {
     });
   }
 
+  handleDeleteCard({ target }) {
+    const {
+      cardTrunfo,
+    } = this.state;
+
+    target.parentNode.remove();
+
+    if (cardTrunfo) {
+      this.setState({ hasTrunfo: false });
+    }
+  }
+
   render() {
     const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3, cardImage,
       cardRare, cardTrunfo, isSaveButtonDisabled, saveArray, hasTrunfo } = this.state;
+
+    const button = (
+      <button
+        type="button"
+        data-testid="delete-button"
+        onClick={ this.handleDeleteCard }
+      >
+        Excluir
+
+      </button>
+    );
 
     const teste = saveArray.map((e) => (<Card
       key={ e.cadName }
@@ -116,6 +140,7 @@ class App extends React.Component {
       cardAttr3={ e.cardAttr3 }
       cardRare={ e.cardRare }
       cardTrunfo={ e.cardTrunfo }
+      button={ button }
     />
     ));
 
@@ -146,7 +171,7 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
         />
-        <p>{ teste }</p>
+        <div>{ teste }</div>
       </div>
     );
   }
