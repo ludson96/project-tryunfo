@@ -70,8 +70,21 @@ class App extends React.Component {
         cardAttr1,
         cardAttr2,
         cardAttr3,
-        cardTrunfo,
+        hasTrunfo,
       } = this.state;
+
+      let { cardTrunfo } = this.state;
+
+      if (hasTrunfo === false) {
+        if (cardTrunfo) {
+          this.setState({ hasTrunfo: true });
+        } else {
+          this.setState({ hasTrunfo: false });
+        }
+      } else {
+        this.setState({ cardTrunfo: false });
+        cardTrunfo = false;
+      }
 
       const meuObjeto = {
         cardName,
@@ -83,12 +96,6 @@ class App extends React.Component {
         cardAttr3,
         cardTrunfo,
       };
-
-      if (cardTrunfo) {
-        this.setState({ hasTrunfo: true });
-      } else {
-        this.setState({ hasTrunfo: false });
-      }
 
       return {
         saveArray: [...prevState.saveArray, meuObjeto],
