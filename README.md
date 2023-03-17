@@ -9,7 +9,7 @@
 ## Informações de aprendizados
 
 - Este é um projeto desenvolvido para praticar `React` e `Passagem de props`;
-- Segundo teste utilizando `React`;
+- Segundo projeto utilizando `React`;
 
 ## Linguagens e ferramentas usadas
 
