@@ -1,17 +1,17 @@
 # Repositório do projeto Tryunfo
 
-# :construction: Estilização em desenvolvimento ! :construction:
+# :construction: 🚧 Estilização em desenvolvimento ! 🚧 :construction:
 
-## Módulo: Front-end
+## 📚 Módulo: 🎨 Front-end
 
  Repositório possuí projeto desenvolvido no período que estive na **Trybe**, abordando conceitos de React com criação de componentes e manipulação de estados em classes e passagem de props.
 
-## Informações de aprendizados
+## 🎓 Informações de aprendizados
 
 - Este é um projeto desenvolvido para praticar `React` e `Passagem de props`;
 - Segundo teste utilizando `React`;
 
-## Linguagens e ferramentas usadas
+## 🛠️ Linguagens e ferramentas usadas
 
 [![Git][Git-logo]][Git-url]
 [![ESLint][ESLint-logo]][ESLint-url]
@@ -20,7 +20,7 @@
 [![JavaScript][JavaScript-logo]][JavaScript-url]
 [![React][React-logo]][React-url]
 
-## O que foi desenvolvido
+## 🧑🏾‍💻 O que foi desenvolvido
 
 Neste projeto, desenvolvi um jogo no estilo Super Trunfo! Ao utilizar essa aplicação uma pessoa usuária deverá ser capaz de:
 
@@ -35,7 +35,7 @@ Na renderização das cartas, a aplicação possui três filtros de listagem de 
 
 Figma de um protótipo [figma](https://www.figma.com/file/psAYBgwjQ1pQqBe3wJvljt/Tryunfo?node-id=0-1&t=dkrrwFID6Gg14OwS-0).
 
-## :memo: Habilidades
+## 📝 Habilidades
 
 Neste projeto, desenvolvi as seguintes habilidates:
 
@@ -46,7 +46,7 @@ Neste projeto, desenvolvi as seguintes habilidates:
 - Criar formulários utilizando sintaxe JSX com as tags: input, textarea, select, form, checkbox;
 - Transmitir informações de componentes filhos para componentes pais via callbacks.
 
-## 💻 :computer: Instruções para instalar e rodar
+## 💻 Instruções para instalar e rodar
 
 1. Clone o repo:
 
