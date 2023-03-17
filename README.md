@@ -1,6 +1,6 @@
-# Repositório do projeto Tryunfo
+# 🗂️ Repositório do projeto 🃏 Tryunfo
 
-# :construction: 🚧 Estilização em desenvolvimento ! 🚧 :construction:
+# 🚧 Estilização em desenvolvimento ! 🚧
 
 ## 📚 Módulo: 🎨 Front-end
 
@@ -37,7 +37,7 @@ Figma de um protótipo [figma](https://www.figma.com/file/psAYBgwjQ1pQqBe3wJvljt
 
 ## 📝 Habilidades
 
-Neste projeto, desenvolvi as seguintes habilidates:
+Neste projeto, desenvolvi as seguintes habilidades:
 
 - Ler o estado de um componente e usá-lo para alterar o que exibimos no browser;
 - Inicializar um componente, dando a ele um estado pré-definido;
@@ -51,13 +51,13 @@ Neste projeto, desenvolvi as seguintes habilidates:
 1. Clone o repo:
 
     ```bash
-    git clone git@github.com:Ludson96/project-solar-system.git
+    git clone git@github.com:Ludson96/project-tryunfo.git
     ```
 
 1. Entre na pasta do repositório que você acabou de clonar:
 
     ```bash
-    cd project-solar-system
+    cd project-tryunfo
     ```
 
 1. Instale as dependências:
@@ -84,4 +84,3 @@ Neste projeto, desenvolvi as seguintes habilidates:
 [JavaScript-url]: https://www.javascript.com/
 [React-logo]: https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB
 [React-url]: https://reactjs.org
-[exemplo]: ./src//images/solar-system.png
