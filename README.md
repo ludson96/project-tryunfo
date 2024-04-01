@@ -1,4 +1,4 @@
-# Repositório do projeto Tryunfo
+# Repositório do projeto Tryunfo 🃏
 
 # 🚧 Estilização em desenvolvimento ! 🚧
 
