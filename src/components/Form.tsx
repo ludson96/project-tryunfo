@@ -1,5 +1,4 @@
 import React from 'react';
-import { Sparkles, PlusCircle, AlertCircle } from 'lucide-react';
 import { MAX_INDIVIDUAL_ATTR, MAX_TOTAL_ATTR } from '../types/card';
 
 export interface FormProps {
@@ -49,21 +48,20 @@ const Form: React.FC<FormProps> = ({
         e.preventDefault();
         if (!isSaveButtonDisabled) onSaveButtonClick();
       }}
-      className="bg-slate-900/80 border border-slate-800 backdrop-blur-md rounded-2xl p-5 sm:p-6 shadow-xl space-y-4"
+      className="space-y-6"
     >
-      <div className="border-b border-slate-800 pb-3">
-        <h2 className="text-xl font-display font-bold text-white flex items-center gap-2">
-          <PlusCircle className="w-5 h-5 text-cyan-400" />
-          Adicionar Nova Carta
-        </h2>
-        <p className="text-xs text-slate-400 mt-0.5">
-          Defina os detalhes e equilibre os atributos para criar uma carta competitiva.
+      <div className="border-b border-[rgba(144,144,144,0.25)] pb-3">
+        <h3 className="text-sm font-heading font-bold uppercase tracking-widestHeader text-black">
+          Configuração da Carta
+        </h3>
+        <p className="text-xs text-[#666666] mt-1">
+          Preencha os campos abaixo de acordo com as especificações do baralho.
         </p>
       </div>
 
       {/* Nome */}
       <div>
-        <label htmlFor="nome" className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+        <label htmlFor="nome" className="block text-xs font-heading font-bold uppercase tracking-widestHeader text-black mb-2">
           Nome da Carta
         </label>
         <input
@@ -73,15 +71,15 @@ const Form: React.FC<FormProps> = ({
           data-testid="name-input"
           value={cardName}
           onChange={onInputChange}
-          placeholder="Ex: Cyber Samurai"
-          className="w-full bg-slate-950/70 border border-slate-700/80 rounded-xl px-3.5 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 transition-all"
+          placeholder="Ex: Explorador Solitário"
+          className="input-paradigm"
         />
       </div>
 
       {/* Descrição */}
       <div>
-        <label htmlFor="descricao" className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
-          Descrição da Carta
+        <label htmlFor="descricao" className="block text-xs font-heading font-bold uppercase tracking-widestHeader text-black mb-2">
+          Descrição & Biografia
         </label>
         <textarea
           name="cardDescription"
@@ -89,16 +87,16 @@ const Form: React.FC<FormProps> = ({
           data-testid="description-input"
           value={cardDescription}
           onChange={onInputChange}
-          rows={2}
-          placeholder="Conte a história ou habilidade desta carta..."
-          className="w-full bg-slate-950/70 border border-slate-700/80 rounded-xl px-3.5 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 transition-all resize-none"
+          rows={3}
+          placeholder="Breve contextualização narrativa sobre a carta..."
+          className="textarea-paradigm"
         />
       </div>
 
       {/* URL da Imagem */}
       <div>
-        <label htmlFor="img" className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
-          URL da Imagem
+        <label htmlFor="img" className="block text-xs font-heading font-bold uppercase tracking-widestHeader text-black mb-2">
+          URL da Fotografia / Ilustração
         </label>
         <input
           type="text"
@@ -107,31 +105,33 @@ const Form: React.FC<FormProps> = ({
           data-testid="image-input"
           value={cardImage}
           onChange={onInputChange}
-          placeholder="https://exemplo.com/imagem.png"
-          className="w-full bg-slate-950/70 border border-slate-700/80 rounded-xl px-3.5 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 transition-all"
+          placeholder="https://exemplo.com/foto.jpg"
+          className="input-paradigm"
         />
       </div>
 
-      {/* Atributos com Indicador de Pontos Restantes */}
-      <div className="bg-slate-950/60 p-3.5 rounded-xl border border-slate-800 space-y-3">
-        <div className="flex items-center justify-between text-xs">
-          <span className="font-semibold text-slate-300">Distribuição de Pontos</span>
+      {/* Atributos Numéricos */}
+      <div className="border border-[rgba(144,144,144,0.25)] rounded p-4 bg-[#fafafa]">
+        <div className="flex items-center justify-between border-b border-[rgba(144,144,144,0.25)] pb-2 mb-4">
+          <span className="text-xs font-heading font-bold uppercase tracking-widestHeader text-black">
+            Distribuição de Atributos
+          </span>
           <span
-            className={`font-mono font-bold px-2 py-0.5 rounded ${
+            className={`text-xs font-heading font-bold uppercase tracking-widestHeader ${
               isExceededTotal
-                ? 'bg-rose-950 text-rose-400 border border-rose-800'
+                ? 'text-red-700'
                 : remainingPoints === 0
-                ? 'bg-amber-950 text-amber-300 border border-amber-800'
-                : 'bg-cyan-950 text-cyan-300 border border-cyan-800'
+                ? 'text-neutral-900 font-black'
+                : 'text-neutral-600'
             }`}
           >
-            {remainingPoints >= 0 ? `${remainingPoints} pts restantes` : `Excedeu ${Math.abs(remainingPoints)} pts!`}
+            {remainingPoints >= 0 ? `${remainingPoints} pts restantes` : `Excedeu ${Math.abs(remainingPoints)} pts`}
           </span>
         </div>
 
-        <div className="grid grid-cols-3 gap-2 sm:gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
-            <label htmlFor="cardAttr1" className="block text-[11px] font-medium text-rose-400 mb-1 truncate">
+            <label htmlFor="cardAttr1" className="block text-[11px] font-heading font-semibold uppercase tracking-wider text-neutral-600 mb-1">
               1. Ataque (0-{MAX_INDIVIDUAL_ATTR})
             </label>
             <input
@@ -143,12 +143,12 @@ const Form: React.FC<FormProps> = ({
               onChange={onInputChange}
               min="0"
               max={MAX_INDIVIDUAL_ATTR}
-              className="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-sm text-white font-mono text-center focus:ring-1 focus:ring-rose-500 focus:outline-none"
+              className="input-paradigm text-center font-bold"
             />
           </div>
 
           <div>
-            <label htmlFor="cardAttr2" className="block text-[11px] font-medium text-sky-400 mb-1 truncate">
+            <label htmlFor="cardAttr2" className="block text-[11px] font-heading font-semibold uppercase tracking-wider text-neutral-600 mb-1">
               2. Defesa (0-{MAX_INDIVIDUAL_ATTR})
             </label>
             <input
@@ -160,13 +160,13 @@ const Form: React.FC<FormProps> = ({
               onChange={onInputChange}
               min="0"
               max={MAX_INDIVIDUAL_ATTR}
-              className="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-sm text-white font-mono text-center focus:ring-1 focus:ring-sky-500 focus:outline-none"
+              className="input-paradigm text-center font-bold"
             />
           </div>
 
           <div>
-            <label htmlFor="cardAttr3" className="block text-[11px] font-medium text-amber-400 mb-1 truncate">
-              3. Vel (0-{MAX_INDIVIDUAL_ATTR})
+            <label htmlFor="cardAttr3" className="block text-[11px] font-heading font-semibold uppercase tracking-wider text-neutral-600 mb-1">
+              3. Agilidade (0-{MAX_INDIVIDUAL_ATTR})
             </label>
             <input
               type="number"
@@ -177,23 +177,22 @@ const Form: React.FC<FormProps> = ({
               onChange={onInputChange}
               min="0"
               max={MAX_INDIVIDUAL_ATTR}
-              className="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-sm text-white font-mono text-center focus:ring-1 focus:ring-amber-500 focus:outline-none"
+              className="input-paradigm text-center font-bold"
             />
           </div>
         </div>
 
         {(isExceededTotal || isAnyAttrInvalid) && (
-          <div className="flex items-center gap-1.5 text-[11px] text-rose-400 font-medium">
-            <AlertCircle className="w-3.5 h-3.5 shrink-0" />
-            <span>Máximo de 90 por atributo e total somado não pode passar de 210.</span>
-          </div>
+          <p className="text-[11px] text-red-600 font-medium mt-3">
+            * O valor individual não pode superar 90 e a soma de todos os atributos não pode ultrapassar 210.
+          </p>
         )}
       </div>
 
       {/* Raridade */}
       <div>
-        <label htmlFor="raridade" className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
-          Raridade
+        <label htmlFor="raridade" className="block text-xs font-heading font-bold uppercase tracking-widestHeader text-black mb-2">
+          Classificação de Raridade
         </label>
         <select
           name="cardRare"
@@ -201,25 +200,24 @@ const Form: React.FC<FormProps> = ({
           data-testid="rare-input"
           value={cardRare}
           onChange={onInputChange}
-          className="w-full bg-slate-950/70 border border-slate-700/80 rounded-xl px-3.5 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500 transition-all cursor-pointer"
+          className="input-paradigm cursor-pointer"
         >
-          <option value="normal" className="bg-slate-900 text-white">Normal</option>
-          <option value="raro" className="bg-slate-900 text-cyan-300">Raro</option>
-          <option value="muito raro" className="bg-slate-900 text-purple-300">Muito raro</option>
+          <option value="normal">Edição Normal</option>
+          <option value="raro">Edição Rara</option>
+          <option value="muito raro">Edição Lendária</option>
         </select>
       </div>
 
-      {/* Super Trunfo Checkbox ou Aviso */}
-      <div className="pt-1">
+      {/* Super Trunfo */}
+      <div>
         {hasTrunfo ? (
-          <div className="flex items-center gap-2 text-xs text-amber-400 bg-amber-950/30 border border-amber-900/50 p-2.5 rounded-xl">
-            <Sparkles className="w-4 h-4 shrink-0" />
-            <span>Você já tem um Super Trunfo em seu baralho.</span>
+          <div className="p-3 border border-[rgba(144,144,144,0.25)] rounded bg-[#fafafa] text-xs text-neutral-600">
+            Você já tem um Super Trunfo em seu baralho.
           </div>
         ) : (
           <label
             htmlFor="trunfo"
-            className="flex items-center gap-3 p-2.5 rounded-xl bg-slate-950/40 border border-slate-800 hover:border-amber-500/50 cursor-pointer transition-all group"
+            className="flex items-center gap-3 p-3 border border-[rgba(144,144,144,0.25)] rounded hover:border-black cursor-pointer transition-colors bg-white"
           >
             <input
               type="checkbox"
@@ -228,30 +226,27 @@ const Form: React.FC<FormProps> = ({
               data-testid="trunfo-input"
               checked={cardTrunfo}
               onChange={onInputChange}
-              className="w-4 h-4 rounded border-slate-700 bg-slate-900 text-amber-500 focus:ring-amber-400 cursor-pointer"
+              className="w-4 h-4 rounded border-neutral-400 text-black focus:ring-black cursor-pointer"
             />
-            <div className="flex items-center gap-1.5 text-xs font-semibold text-slate-200 group-hover:text-amber-300 transition-colors">
-              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-              Super Trunfo (Carta Lendária)
-            </div>
+            <span className="text-xs font-heading font-bold uppercase tracking-widestHeader text-black">
+              Definir como Super Trunfo
+            </span>
           </label>
         )}
       </div>
 
       {/* Botão de Salvar */}
-      <button
-        type="button"
-        data-testid="save-button"
-        disabled={isSaveButtonDisabled}
-        onClick={onSaveButtonClick}
-        className={`w-full py-2.5 px-4 rounded-xl font-display font-bold text-sm tracking-wide transition-all shadow-lg flex items-center justify-center gap-2 ${
-          isSaveButtonDisabled
-            ? 'bg-slate-800/60 text-slate-500 cursor-not-allowed border border-slate-800'
-            : 'bg-gradient-to-r from-cyan-500 via-sky-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white shadow-glow-cyan active:scale-[0.99] cursor-pointer'
-        }`}
-      >
-        Salvar Carta no Baralho
-      </button>
+      <div className="pt-2">
+        <button
+          type="button"
+          data-testid="save-button"
+          disabled={isSaveButtonDisabled}
+          onClick={onSaveButtonClick}
+          className="btn-paradigm primary w-full"
+        >
+          Salvar no Baralho
+        </button>
+      </div>
     </form>
   );
 };

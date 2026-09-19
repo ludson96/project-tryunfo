@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import confetti from 'canvas-confetti';
-import { Swords, Trophy, RotateCcw, ArrowRight, ShieldAlert, Zap, Award } from 'lucide-react';
 import { useBattleStore } from '../store/useBattleStore';
 import { useDeckStore } from '../store/useDeckStore';
 import Card from './Card';
@@ -32,8 +31,8 @@ const BattleArena: React.FC = () => {
   useEffect(() => {
     if (isGameOver && gameWinner === 'player') {
       confetti({
-        particleCount: 120,
-        spread: 80,
+        particleCount: 100,
+        spread: 70,
         origin: { y: 0.6 },
       });
     }
@@ -41,11 +40,12 @@ const BattleArena: React.FC = () => {
 
   if (deck.length < 2) {
     return (
-      <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-8 sm:p-12 text-center max-w-xl mx-auto backdrop-blur-md">
-        <ShieldAlert className="w-16 h-16 text-amber-400 mx-auto mb-4 animate-bounce" />
-        <h2 className="text-2xl font-display font-bold text-white mb-2">Baralho Insuficiente</h2>
-        <p className="text-sm text-slate-400 mb-6">
-          Você precisa de pelo menos <strong className="text-cyan-400">2 cartas</strong> no seu baralho para iniciar uma batalha contra a máquina.
+      <div className="border border-[rgba(144,144,144,0.25)] p-12 text-center rounded max-w-xl mx-auto bg-[#fafafa]">
+        <h3 className="text-xl font-heading font-bold uppercase tracking-widestHeader text-black mb-3">
+          Cartas Insuficientes
+        </h3>
+        <p className="text-sm text-[#666666] mb-6">
+          É necessário ter no mínimo <strong>2 cartas</strong> cadastradas no baralho para realizar um confronto.
         </p>
       </div>
     );
@@ -53,40 +53,32 @@ const BattleArena: React.FC = () => {
 
   if (!isStarted) {
     return (
-      <div className="bg-slate-900/80 border border-slate-800 rounded-3xl p-6 sm:p-12 text-center max-w-2xl mx-auto backdrop-blur-md shadow-2xl relative overflow-hidden">
-        <div className="absolute -top-24 -right-24 w-60 h-60 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-24 -left-24 w-60 h-60 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="border border-[rgba(144,144,144,0.25)] p-8 sm:p-14 text-center max-w-2xl mx-auto rounded bg-[#fafafa]">
+        <span className="badge-trunfo-classic mb-4">
+          Confronto de Cartas
+        </span>
 
-        <div className="relative z-10">
-          <div className="inline-flex p-4 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-purple-500/20 border border-cyan-500/30 mb-6">
-            <Swords className="w-12 h-12 text-cyan-400" />
-          </div>
+        <h2 className="text-3xl sm:text-4xl font-heading font-bold uppercase tracking-widestHeader text-black mb-4 mt-2">
+          Arena de Duelo
+        </h2>
 
-          <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-white mb-3">
-            Arena de Duelo Super Trunfo
-          </h2>
+        <p className="text-sm text-[#555555] max-w-md mx-auto mb-8 leading-relaxed">
+          O baralho será embaralhado e dividido igualmente entre você e o adversário. A cada rodada, analise sua carta e escolha o atributo com maior probabilidade de vitória.
+        </p>
 
-          <p className="text-sm text-slate-300 max-w-md mx-auto mb-8 leading-relaxed">
-            Seu baralho será embaralhado e dividido entre você e a CPU. A cada rodada, escolha seu atributo mais forte para superar a carta oculta do oponente!
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-4 text-xs font-semibold text-slate-400 mb-8">
-            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-950/60 border border-slate-800">
-              <span className="w-2 h-2 rounded-full bg-cyan-400" /> Total no Deck: {deck.length} cartas
-            </div>
-            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-950/60 border border-slate-800">
-              <Zap className="w-3.5 h-3.5 text-amber-400" /> Super Trunfo vence cartas comuns
-            </div>
-          </div>
-
-          <button
-            type="button"
-            onClick={() => startBattle(deck)}
-            className="px-8 py-3.5 rounded-xl font-display font-bold text-base tracking-wider uppercase bg-gradient-to-r from-cyan-500 via-sky-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white shadow-glow-cyan transition-all transform hover:scale-105 active:scale-95 cursor-pointer"
-          >
-            Iniciar Duelo Agora
-          </button>
+        <div className="flex flex-wrap justify-center gap-6 text-xs text-neutral-600 mb-8 pb-8 border-b border-[rgba(144,144,144,0.25)]">
+          <span>Baralho: <strong>{deck.length} cartas</strong></span>
+          <span>•</span>
+          <span>Regra: <strong>Super Trunfo vence cartas comuns</strong></span>
         </div>
+
+        <button
+          type="button"
+          onClick={() => startBattle(deck)}
+          className="btn-paradigm primary px-8"
+        >
+          Iniciar Confronto
+        </button>
       </div>
     );
   }
@@ -94,39 +86,32 @@ const BattleArena: React.FC = () => {
   // Fim de jogo
   if (isGameOver) {
     return (
-      <div className="bg-slate-900/90 border border-slate-800 rounded-3xl p-8 sm:p-12 text-center max-w-xl mx-auto backdrop-blur-md shadow-2xl">
-        <div className="mb-4">
-          {gameWinner === 'player' ? (
-            <Trophy className="w-16 h-16 text-yellow-400 mx-auto animate-pulse" />
-          ) : gameWinner === 'cpu' ? (
-            <ShieldAlert className="w-16 h-16 text-rose-500 mx-auto" />
-          ) : (
-            <Award className="w-16 h-16 text-cyan-400 mx-auto" />
-          )}
-        </div>
+      <div className="border-2 border-black p-8 sm:p-12 text-center max-w-lg mx-auto rounded bg-white shadow-md">
+        <span className="badge-trunfo-classic mb-4">
+          Resultado Final
+        </span>
 
-        <h2 className="text-3xl font-display font-extrabold text-white mb-2">
-          {gameWinner === 'player' && 'Vitória Lendária!'}
-          {gameWinner === 'cpu' && 'Derrota em Combate!'}
-          {gameWinner === 'draw' && 'Empate Eletrizante!'}
-        </h2>
+        <h3 className="text-2xl sm:text-3xl font-heading font-bold uppercase tracking-widestHeader text-black mb-2 mt-3">
+          {gameWinner === 'player' && 'Vitória Conquistada'}
+          {gameWinner === 'cpu' && 'Derrota em Combate'}
+          {gameWinner === 'draw' && 'Empate Registrado'}
+        </h3>
 
-        <p className="text-sm text-slate-300 mb-6">
-          {gameWinner === 'player' && 'Você superou a CPU com maestria estratégica e dominou a arena!'}
-          {gameWinner === 'cpu' && 'A CPU levou a melhor desta vez. Ajuste seus atributos e tente novamente.'}
-          {gameWinner === 'draw' && 'Um duelo equilibradíssimo até o último segundo.'}
+        <p className="text-sm text-[#666666] mb-8">
+          {gameWinner === 'player' && 'Excelente leitura de jogo e escolha estratégica de atributos.'}
+          {gameWinner === 'cpu' && 'O oponente superou as rodadas decisivas nesta partida.'}
+          {gameWinner === 'draw' && 'Ambos os competidores empataram em número de rodadas vitoriosas.'}
         </p>
 
-        {/* Placar Final */}
-        <div className="flex justify-center items-center gap-6 mb-8 bg-slate-950/60 p-4 rounded-2xl border border-slate-800 max-w-xs mx-auto">
-          <div className="text-center">
-            <span className="text-xs text-slate-400 font-semibold block">Você</span>
-            <span className="text-3xl font-display font-black text-cyan-400">{playerScore}</span>
+        {/* Placar */}
+        <div className="grid grid-cols-2 border border-[rgba(144,144,144,0.25)] rounded p-4 mb-8 bg-[#fafafa]">
+          <div className="border-r border-[rgba(144,144,144,0.25)] pr-4">
+            <span className="text-xs font-heading uppercase text-neutral-500 block">Jogador</span>
+            <span className="text-4xl font-heading font-black text-black">{playerScore}</span>
           </div>
-          <span className="text-xl font-bold text-slate-600">VS</span>
-          <div className="text-center">
-            <span className="text-xs text-slate-400 font-semibold block">CPU</span>
-            <span className="text-3xl font-display font-black text-rose-400">{cpuScore}</span>
+          <div className="pl-4">
+            <span className="text-xs font-heading uppercase text-neutral-500 block">Adversário</span>
+            <span className="text-4xl font-heading font-black text-black">{cpuScore}</span>
           </div>
         </div>
 
@@ -134,16 +119,16 @@ const BattleArena: React.FC = () => {
           <button
             type="button"
             onClick={() => startBattle(deck)}
-            className="flex items-center gap-2 px-6 py-2.5 rounded-xl font-display font-bold text-sm bg-cyan-500 hover:bg-cyan-400 text-slate-950 transition-colors shadow-glow-cyan cursor-pointer"
+            className="btn-paradigm primary"
           >
-            <RotateCcw className="w-4 h-4" /> Jogar Novamente
+            Jogar Novamente
           </button>
           <button
             type="button"
             onClick={resetBattle}
-            className="px-6 py-2.5 rounded-xl font-display font-bold text-sm bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors cursor-pointer"
+            className="btn-paradigm"
           >
-            Voltar ao Menu
+            Encerrar
           </button>
         </div>
       </div>
@@ -151,42 +136,44 @@ const BattleArena: React.FC = () => {
   }
 
   return (
-    <div className="space-y-6">
-      {/* Placar Superior */}
-      <div className="bg-slate-900/80 border border-slate-800 backdrop-blur-md rounded-2xl p-4 sm:px-6 shadow-xl flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <div className="text-left">
-            <span className="text-[10px] uppercase font-bold text-cyan-400 tracking-wider">Jogador</span>
-            <div className="flex items-baseline gap-1">
-              <span className="text-2xl font-display font-black text-white">{playerScore}</span>
-              <span className="text-xs text-slate-400">({playerDeck.length} cartas)</span>
-            </div>
+    <div className="space-y-8">
+      {/* Placar Superior Editorial */}
+      <div className="border border-[rgba(144,144,144,0.25)] p-4 sm:px-8 rounded bg-[#fafafa] flex items-center justify-between">
+        <div className="text-left">
+          <span className="text-[10px] font-heading font-bold uppercase tracking-widestHeader text-neutral-500 block">
+            Jogador
+          </span>
+          <div className="flex items-baseline gap-2">
+            <span className="text-2xl font-heading font-black text-black">{playerScore} pts</span>
+            <span className="text-xs text-neutral-400">({playerDeck.length} restantes)</span>
           </div>
         </div>
 
-        <div className="text-center px-4 py-1 rounded-xl bg-slate-950/80 border border-slate-800">
-          <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">Rodada</span>
-          <span className="text-lg font-display font-extrabold text-amber-400">{round}</span>
+        <div className="text-center px-4 py-1 border border-[rgba(144,144,144,0.25)] rounded bg-white">
+          <span className="text-[9px] font-heading font-bold uppercase tracking-widestHeader text-neutral-500 block">
+            Rodada
+          </span>
+          <span className="text-base font-heading font-black text-black">{round}</span>
         </div>
 
-        <div className="flex items-center gap-4 text-right">
-          <div>
-            <span className="text-[10px] uppercase font-bold text-rose-400 tracking-wider">CPU Oponente</span>
-            <div className="flex items-baseline gap-1 justify-end">
-              <span className="text-xs text-slate-400">({cpuDeck.length} cartas)</span>
-              <span className="text-2xl font-display font-black text-white">{cpuScore}</span>
-            </div>
+        <div className="text-right">
+          <span className="text-[10px] font-heading font-bold uppercase tracking-widestHeader text-neutral-500 block">
+            Adversário
+          </span>
+          <div className="flex items-baseline gap-2 justify-end">
+            <span className="text-xs text-neutral-400">({cpuDeck.length} restantes)</span>
+            <span className="text-2xl font-heading font-black text-black">{cpuScore} pts</span>
           </div>
         </div>
       </div>
 
-      {/* Arena de Duelo (Cartas Frente a Frente) */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-12 items-center max-w-4xl mx-auto">
-        {/* Carta do Jogador */}
+      {/* Duelo de Cartas */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start max-w-3xl mx-auto">
+        {/* Jogador */}
         <div className="flex flex-col items-center">
-          <div className="text-xs font-display font-bold uppercase tracking-wider text-cyan-400 mb-2 flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" /> Sua Carta (Escolha um Atributo)
-          </div>
+          <span className="text-xs font-heading font-bold uppercase tracking-widestHeader text-black mb-3">
+            Sua Carta (Selecione o Atributo)
+          </span>
           {currentRoundPlayerCard && (
             <Card
               cardName={currentRoundPlayerCard.cardName}
@@ -205,24 +192,24 @@ const BattleArena: React.FC = () => {
           )}
         </div>
 
-        {/* Carta da CPU */}
+        {/* CPU */}
         <div className="flex flex-col items-center">
-          <div className="text-xs font-display font-bold uppercase tracking-wider text-rose-400 mb-2">
-            Carta da CPU {isRevealed ? '(Revelada)' : '(Oculta)'}
-          </div>
+          <span className="text-xs font-heading font-bold uppercase tracking-widestHeader text-neutral-500 mb-3">
+            Carta do Oponente {isRevealed ? '(Revelada)' : '(Oculta)'}
+          </span>
 
           {currentRoundCpuCard && (
-            <div className="relative w-full max-w-[320px]">
-              {/* Se não foi revelada, exibe o verso da carta */}
+            <div className="w-full max-w-[340px]">
               {!isRevealed ? (
-                <div className="rounded-2xl p-6 transition-all duration-300 backdrop-blur-md flex flex-col items-center justify-center w-full min-h-[460px] bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 border-2 border-slate-800 shadow-2xl relative overflow-hidden group">
-                  <div className="absolute inset-0 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:16px_16px] opacity-10" />
-                  <div className="w-24 h-32 rounded-xl border-2 border-dashed border-slate-700/80 flex items-center justify-center mb-4">
-                    <Swords className="w-10 h-10 text-slate-600 animate-pulse" />
+                <div className="border-2 border-dashed border-[rgba(144,144,144,0.4)] rounded p-8 min-h-[500px] flex flex-col items-center justify-center text-center bg-[#fafafa]">
+                  <div className="w-16 h-24 border border-[rgba(144,144,144,0.3)] rounded mb-4 flex items-center justify-center">
+                    <span className="font-heading font-bold text-xs text-neutral-400">?</span>
                   </div>
-                  <h4 className="font-display font-bold text-slate-400 text-base mb-1">Carta Oculta</h4>
-                  <p className="text-xs text-slate-600 text-center max-w-[200px]">
-                    Clique em um atributo na sua carta para revelar o confronto!
+                  <h4 className="font-heading font-bold text-xs uppercase tracking-widestHeader text-black mb-2">
+                    Carta Oculta
+                  </h4>
+                  <p className="text-xs text-[#777777] max-w-[200px]">
+                    Escolha um atributo na sua carta para realizar o confronto.
                   </p>
                 </div>
               ) : (
@@ -243,33 +230,21 @@ const BattleArena: React.FC = () => {
         </div>
       </div>
 
-      {/* Banner de Resultado da Rodada e Próxima Rodada */}
+      {/* Conclusão da Rodada */}
       {isRevealed && (
-        <div className="bg-slate-900/90 border border-slate-700 backdrop-blur-md rounded-2xl p-5 text-center max-w-md mx-auto shadow-2xl animate-fade-in">
-          <div className="text-lg font-display font-bold mb-1">
-            {roundWinner === 'player' && (
-              <span className="text-cyan-400 flex items-center justify-center gap-2">
-                <Trophy className="w-5 h-5" /> Você venceu a rodada! (+1 ponto)
-              </span>
-            )}
-            {roundWinner === 'cpu' && (
-              <span className="text-rose-400 flex items-center justify-center gap-2">
-                A CPU venceu a rodada! (+1 ponto para CPU)
-              </span>
-            )}
-            {roundWinner === 'draw' && (
-              <span className="text-amber-400 flex items-center justify-center gap-2">
-                Empate de atributos! (Sem pontos)
-              </span>
-            )}
+        <div className="border border-black p-5 text-center max-w-sm mx-auto rounded bg-white shadow-sm">
+          <div className="text-sm font-heading font-bold uppercase tracking-widestHeader mb-3">
+            {roundWinner === 'player' && 'Vitória na Rodada (+1)'}
+            {roundWinner === 'cpu' && 'Adversário Venceu (+1)'}
+            {roundWinner === 'draw' && 'Empate de Atributos'}
           </div>
 
           <button
             type="button"
             onClick={nextRound}
-            className="mt-3 px-6 py-2 rounded-xl font-display font-bold text-xs uppercase tracking-wider bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white shadow-glow-cyan flex items-center gap-2 mx-auto cursor-pointer"
+            className="btn-paradigm primary w-full text-xs py-3 h-auto"
           >
-            Próxima Rodada <ArrowRight className="w-4 h-4" />
+            Avançar para a Próxima Rodada
           </button>
         </div>
       )}
