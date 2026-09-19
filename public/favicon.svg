@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="cardGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+    <linearGradient id="cardGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="starGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fde047" />
+      <stop offset="100%" stop-color="#eab308" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Fundo sutil circular -->
+  <circle cx="32" cy="32" r="30" fill="#090d16" stroke="#334155" stroke-width="2" />
+
+  <!-- Carta de trás inclinada -->
+  <rect x="12" y="14" width="28" height="40" rx="4" fill="url(#cardGrad2)" stroke="#a855f7" stroke-width="1.5" transform="rotate(-15 26 34)" opacity="0.8" />
+
+  <!-- Carta da frente inclinada -->
+  <rect x="24" y="10" width="28" height="40" rx="4" fill="url(#cardGrad1)" stroke="#38bdf8" stroke-width="2" transform="rotate(10 38 30)" filter="url(#glow)" />
+
+  <!-- Detalhe interno da carta frontal -->
+  <rect x="27" y="14" width="22" height="14" rx="2" fill="#0f172a" opacity="0.6" transform="rotate(10 38 30)" />
+
+  <!-- Estrela Trunfo Dourada no centro -->
+  <polygon points="34,22 36.5,29 44,29 38,33.5 40.5,41 34,36.5 27.5,41 30,33.5 24,29 31.5,29" fill="url(#starGrad)" stroke="#ca8a04" stroke-width="0.8" filter="url(#glow)" />
+
+  <!-- Letra T estilizada no topo -->
+  <text x="34" y="55" font-family="'Rajdhani', sans-serif" font-size="10" font-weight="bold" fill="#38bdf8" text-anchor="middle" letter-spacing="1">TRUNFO</text>
+</svg>

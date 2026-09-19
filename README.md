@@ -1,86 +1,115 @@
-# Repositório do projeto Tryunfo 🃏
+<div align="center">
+  <h1>🎴 TRYUNFO 2.0</h1>
+  <p><strong>Deck Builder & Super Trunfo Battle Arena</strong></p>
+  <p>Aplicação moderna desenvolvida em React, TypeScript, Tailwind CSS e Zustand para criação de cartas colecionáveis e duelos estratégicos contra a CPU.</p>
 
-# 🚧 Estilização em desenvolvimento ! 🚧
+  <p>
+    <a href="#-funcionalidades-em-destaque">Funcionalidades</a> •
+    <a href="#-tecnologias-utilizadas">Tecnologias</a> •
+    <a href="#-arquitetura-e-padroes">Arquitetura</a> •
+    <a href="#-como-executar-o-projeto">Como Executar</a> •
+    <a href="#-testes-automatizados">Testes</a>
+  </p>
+</div>
 
-## Módulo: Front-end
+---
 
- Repositório possuí projeto desenvolvido no período que estive na **Trybe**, abordando conceitos de React com criação de componentes e manipulação de estados em classes e passagem de props.
+## 🚀 Funcionalidades em Destaque
 
-## Informações de aprendizados
+### 🎨 1. Criador de Cartas (Deck Builder)
+- **Validação de Atributos em Tempo Real**: Sistema de pontuação balanceado (máximo de 90 por atributo e teto somado de 210 pontos).
+- **Controle de Super Trunfo**: Regra que assegura apenas 1 carta lendária "Super Trunfo" por baralho.
+- **Preview Dinâmico**: Renderização instantânea da carta com estilos diferenciados por raridade (*Normal*, *Raro*, *Muito Raro*).
+- **Efeitos Holográficos (Card Foil)**: Animação e brilho neon para cartas com Super Trunfo ativado.
 
-- Este é um projeto desenvolvido para praticar `React` e `Passagem de props`;
-- Segundo projeto utilizando `React`;
+### ⚔️ 2. Arena de Duelo (Modo Batalha PvCPU)
+- **Embaralhamento e Divisão**: O baralho é distribuído igualmente entre o Jogador e a CPU.
+- **Duelos por Atributo**: O jogador escolhe o atributo (Ataque, Defesa ou Velocidade) da sua carta da rodada contra a carta oculta do oponente.
+- **Regra Clássica de Trunfo**: Cartas Super Trunfo derrotam qualquer carta comum.
+- **Placar Interativo & Vitória**: Registro de pontuação rodada a rodada e celebração com confetes dinâmicos em caso de vitória.
 
-## Linguagens e ferramentas usadas
+### 📦 3. Persistência & Baralho Inicial
+- **Sincronização com LocalStorage**: Todas as cartas criadas ou excluídas são salvas automaticamente no navegador via middleware do Zustand.
+- **Deck Inicial Pré-Carregado**: O projeto já inicia com 6 cartas balanceadas prontas para demonstração e jogo imediato.
+- **Filtros Avançados**: Busca combinada por nome, filtro por raridade e alternador para cartas Super Trunfo.
 
-[![Git][Git-logo]][Git-url]
-[![ESLint][ESLint-logo]][ESLint-url]
-[![HTML5][HTML5-logo]][HTML5-url]
-[![CSS3][CSS3-logo]][CSS3-url]
-[![JavaScript][JavaScript-logo]][JavaScript-url]
-[![React][React-logo]][React-url]
+---
 
-## O que foi desenvolvido
+## 🛠️ Tecnologias Utilizadas
 
-Neste projeto, desenvolvi um jogo no estilo Super Trunfo! Ao utilizar essa aplicação uma pessoa usuária deverá ser capaz de:
+- **Core**: [React 18](https://react.dev/) com Functional Components e Hooks.
+- **Linguagem**: [TypeScript 5](https://www.typescriptlang.org/) com tipagem estrita para todas as entidades e stores.
+- **Estilização**: [Tailwind CSS](https://tailwindcss.com/) com paleta cyberpunk/dark mode, efeitos glassmorphism e animações personalizadas.
+- **Gerenciamento de Estado**: [Zustand](https://zustand-demo.pmnd.rs/) com persistência automática no `localStorage`.
+- **Tooling & Build**: [Vite 6](https://vitejs.dev/) para compilação ultrarrápida.
+- **Testes Automatizados**: [Vitest](https://vitest.dev/) + [React Testing Library](https://testing-library.com/) com cobertura para stores e componentes.
+- **Ícones**: [Lucide React](https://lucide.dev/).
+- **Efeitos Visuais**: [Canvas Confetti](https://github.com/catdad/canvas-confetti).
 
-- Criar um baralho com o tema livre;
-- Adicionar e remover uma carta do baralho;
-- Visualizar todas as cartas que foram adicionadas ao baralho;
-- Jogar com o baralho criado.
+---
 
-Foi desenvolvido uma aplicação em React com manipulação de estados em classes. Essa aplicação simulará um jogo de Super Trunfo, desde a criação das cartas do seu baralho até a funcionalidade de jogar.
+## 🏛️ Arquitetura e Padrões
 
-Na renderização das cartas, a aplicação possui três filtros de listagem de cartas: filtro por nome, por raridade e por Super Trunfo. Os filtros nome e raridade são acumulativos. O filtro Super Trunfo funciona de forma independente.
+```text
+src/
+├── components/
+│   ├── __tests__/          # Testes unitários de componentes
+│   ├── BattleArena.tsx      # Arena interativa de combate contra CPU
+│   ├── Card.tsx             # Card com efeitos de borda, badges e progress bars
+│   ├── DeckCollection.tsx   # Grid responsivo e barra de filtros
+│   ├── Form.tsx             # Formulário reativo com cálculo de pontos
+│   └── Navbar.tsx           # Navegação principal e alternância de abas
+├── data/
+│   └── defaultDeck.ts       # Cartas padrão balanceadas
+├── store/
+│   ├── __tests__/          # Testes unitários dos stores Zustand
+│   ├── useBattleStore.ts    # Máquina de estados do combate
+│   └── useDeckStore.ts      # Store central de cartas com persistência
+├── test/
+│   └── setup.ts             # Configuração do Vitest e Jest DOM
+├── types/
+│   └── card.ts              # Definições de tipos e interfaces TypeScript
+├── App.tsx                  # Componente raiz da aplicação
+├── index.css                # Diretivas Tailwind e estilizações holográficas
+└── index.tsx                # Ponto de entrada React 18
+```
 
-Figma de um protótipo [figma](https://www.figma.com/file/psAYBgwjQ1pQqBe3wJvljt/Tryunfo?node-id=0-1&t=dkrrwFID6Gg14OwS-0).
+---
 
-## Habilidades
+## 💻 Como Executar o Projeto
 
-Neste projeto, desenvolvi as seguintes habilidades:
+```bash
+# 1. Clone o repositório
+git clone https://github.com/seu-usuario/project-tryunfo.git
 
-- Ler o estado de um componente e usá-lo para alterar o que exibimos no browser;
-- Inicializar um componente, dando a ele um estado pré-definido;
-- Atualizar o estado de um componente;
-- Capturar eventos utilizando a sintaxe do React;
-- Criar formulários utilizando sintaxe JSX com as tags: input, textarea, select, form, checkbox;
-- Transmitir informações de componentes filhos para componentes pais via callbacks.
+# 2. Acesse a pasta do projeto
+cd project-tryunfo
 
-## Instruções para instalar e rodar
+# 3. Instale as dependências
+npm install
 
-1. Clone o repo:
+# 4. Inicie o servidor de desenvolvimento
+npm run dev
+```
 
-    ```bash
-    git clone git@github.com:Ludson96/project-tryunfo.git
-    ```
+Abra `http://localhost:5173` no seu navegador.
 
-1. Entre na pasta do repositório que você acabou de clonar:
+---
 
-    ```bash
-    cd project-tryunfo
-    ```
+## 🧪 Testes Automatizados
 
-1. Instale as dependências:
+O projeto conta com suite de testes usando **Vitest** e **React Testing Library**:
 
-    ```bash
-    npm install
-    ```
+```bash
+# Executar todos os testes
+npm run test
 
-1. Execute a aplicação `React`:
+# Executar testes em modo watch
+npm run test:watch
+```
 
-    ```bash
-    npm start
-    ```
+---
 
-[Git-logo]: https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white
-[Git-url]: https://git-scm.com
-[ESLint-logo]: https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white
-[ESLint-url]: https://eslint.org/
-[HTML5-logo]: https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white
-[HTML5-url]: https://developer.mozilla.org/pt-BR/docs/Web/HTML
-[CSS3-logo]: https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white
-[CSS3-url]: https://developer.mozilla.org/pt-BR/docs/Web/CSS
-[JavaScript-logo]: https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E
-[JavaScript-url]: https://www.javascript.com/
-[React-logo]: https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB
-[React-url]: https://reactjs.org
+## 📄 Licença
+
+Este projeto está sob a licença [MIT](LICENSE).
