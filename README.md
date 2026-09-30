@@ -6,7 +6,6 @@
 [![Zustand 5](https://img.shields.io/badge/Zustand-5.0.3-443e38.svg?style=for-the-badge&logo=react&logoColor=white)](https://zustand-demo.pmnd.rs/)
 [![Vite 6](https://img.shields.io/badge/Vite-6.1.0-646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Vitest 3](https://img.shields.io/badge/Vitest-3.0.5-6E9F18.svg?style=for-the-badge&logo=vitest&logoColor=white)](https://vitest.dev/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
 > 🇧🇷 **Português** | 🇺🇸 [**English Version**](README.en.md)
 
@@ -24,7 +23,6 @@ Aplicação web interativa de criação de cartas colecionáveis e arena de duel
 - [📁 Estrutura do Repositório](#-estrutura-do-repositório)
 - [💡 Decisões Técnicas](#-decisões-técnicas)
 - [🚀 Como Executar o Projeto](#-como-executar-o-projeto)
-- [📄 Licença](#-licença)
 
 ## 📝 Sobre o Projeto
 
@@ -200,10 +198,6 @@ npm run build
 ```
 
 Os arquivos estáticos otimizados serão gerados na pasta `dist/`.
-
-## 📄 Licença
-
-Este projeto está licenciado sob os termos da [Licença MIT](LICENSE).
 
 <div align="center">
   Desenvolvido por <strong>Ludson Pereira dos Santos</strong> 🚀<br />
